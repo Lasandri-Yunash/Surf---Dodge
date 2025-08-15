@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class OceanManager: MonoBehaviour
+public class OceanManager : MonoBehaviour
 {
-    public Transform[] initialWaveSets; 
-    public GameObject[] wavePrefabs; 
+    public Transform[] initialWaveSets;
+    public GameObject[] wavePrefabs;
     public int totalWaves = 30;
-    public float waveLength = 20f; 
-    public float moveSpeed = 5f; 
+    public float waveLength = 20f;
+    public float moveSpeed = 5f;
 
-    [HideInInspector] public bool startMoving = false; 
+    [HideInInspector] public bool startMoving = false;
 
     private Transform[] allWaves;
 
@@ -28,7 +28,7 @@ public class OceanManager: MonoBehaviour
             int prefabIndex = (i % wavePrefabs.Length);
             GameObject newWave = Instantiate(
                 wavePrefabs[prefabIndex],
-                Vector3.forward * (i * waveLength),
+                Vector3.forward * (i * waveLength - 10f),
                 Quaternion.identity
             );
             allWaves[i] = newWave.transform;
@@ -37,11 +37,27 @@ public class OceanManager: MonoBehaviour
 
     void Update()
     {
-        if (!startMoving) return; 
+        if (!startMoving) return;
 
-        foreach (Transform wave in allWaves)
+        for (int i = 0; i < allWaves.Length; i++)
         {
+            Transform wave = allWaves[i];
             wave.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
+
+            
+            if (wave.position.z < -waveLength)
+            {
+                
+                float furthestZ = float.MinValue;
+                foreach (Transform w in allWaves)
+                {
+                    if (w.position.z > furthestZ)
+                        furthestZ = w.position.z;
+                }
+
+                
+                wave.position = new Vector3(0, 0, furthestZ + waveLength -10f);
+            }
         }
     }
 }
