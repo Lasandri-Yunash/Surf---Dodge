@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
@@ -9,7 +9,9 @@ public enum SIDE { Left, Mid, Right }
 public class Character : MonoBehaviour
 {
     public SIDE m_Side = SIDE.Mid;
-    float NewXpos = 0f;
+    public float NewXpos;
+    public float laneOffset;  // distance between lanes
+    private float centerX;            // middle lane position
     [HideInInspector]
     public bool SwipeLeft;
     public bool SwipeRight;
@@ -35,13 +37,18 @@ public class Character : MonoBehaviour
     void Start()
     {
         m_char = GetComponent<CharacterController>();
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(-4.2f, 3f, 45f);
         animator = GetComponent<Animator>();
+
+        centerX = transform.position.x;
+
+        m_Side = SIDE.Mid;
+        NewXpos = centerX;
     }
 
     void Update()
     {
-        // Reset swipe flags every frame
+        
         SwipeLeft = false;
         SwipeRight = false;
         SwipeUp = false;
@@ -88,13 +95,13 @@ public class Character : MonoBehaviour
         {
             if (m_Side == SIDE.Mid)
             {
-                NewXpos = -XValue;
+                NewXpos = centerX - laneOffset; ;
                 m_Side = SIDE.Left;
                 animator.Play("dodgetLeft");
             }
             else if (m_Side == SIDE.Right)
             {
-                NewXpos = 0;
+                NewXpos = centerX;
                 m_Side = SIDE.Mid;
                 animator.Play("dodgetLeft");
             }
@@ -103,13 +110,13 @@ public class Character : MonoBehaviour
         {
             if (m_Side == SIDE.Mid)
             {
-                NewXpos = XValue;
+                NewXpos = centerX + laneOffset;
                 m_Side = SIDE.Right;
                 animator.Play("dodgetRight");
             }
             else if (m_Side == SIDE.Left)
             {
-                NewXpos = 0;
+                NewXpos = centerX;
                 m_Side = SIDE.Mid;
                 animator.Play("dodgetRight");
             }
@@ -118,6 +125,7 @@ public class Character : MonoBehaviour
         x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
         m_char.Move(moveVector);
         Jump();
+        Swim();
     }
 
     public void Jump()
@@ -144,6 +152,22 @@ public class Character : MonoBehaviour
             if (m_char.velocity.y<-0.1f)
             animator.Play("Falling");
         }
+    }
+
+    public void Swim()
+    {
+        if (SwipeDown && !InRoll)  
+        {
+            InRoll = true; 
+            animator.CrossFadeInFixedTime("Swim", 0.1f);
+            Vector3 targetPos = new Vector3(transform.position.x, -10f, transform.position.z);
+            Invoke("EndSwim", 1.0f); 
+        }
+    }
+
+    void EndSwim()
+    {
+        InRoll = false;
     }
 
 }

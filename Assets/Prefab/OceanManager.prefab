@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7466800736584300014
+--- !u!1 &6156814451605989162
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7466800736584300008}
-  - component: {fileID: 7466800736584300009}
+  - component: {fileID: 6156814451605989164}
+  - component: {fileID: 6156814451605989165}
   m_Layer: 0
   m_Name: OceanManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7466800736584300008
+--- !u!4 &6156814451605989164
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7466800736584300014}
+  m_GameObject: {fileID: 6156814451605989162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.078405, y: 33.382652, z: -0.8542099}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7466800736584300009
+--- !u!114 &6156814451605989165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7466800736584300014}
+  m_GameObject: {fileID: 6156814451605989162}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4c9975123f2502478045df3b595cda2, type: 3}
@@ -49,9 +49,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   wavePrefabs:
-  - {fileID: 7636403895417206581, guid: 5fbaf9aa99bd3be44a9ee4ed0de88269, type: 3}
-  - {fileID: 2759012389578587218, guid: dcc01d18bf7106947abac7c82f1a39c3, type: 3}
-  - {fileID: 3670232885275526538, guid: fe3501e032199874e99d6fcc0fd12668, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   totalWaves: 30
   waveLength: 20
   moveSpeed: 25
