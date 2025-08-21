@@ -34,10 +34,11 @@ public class Character : MonoBehaviour
     private float y;
     public bool InJump;
     public bool InRoll;
+    public GameObject surfBoad;
     void Start()
     {
         m_char = GetComponent<CharacterController>();
-        transform.position = new Vector3(-4.2f, 3f, 45f);
+        transform.position = new Vector3(-4.2f, 2f, 45f);
         animator = GetComponent<Animator>();
 
         centerX = transform.position.x;
@@ -97,13 +98,20 @@ public class Character : MonoBehaviour
             {
                 NewXpos = centerX - laneOffset; ;
                 m_Side = SIDE.Left;
-                animator.Play("dodgetLeft");
+                if (InRoll)
+                    animator.Play("Swim");
+                else
+                    animator.Play("dodgetLeft");
             }
             else if (m_Side == SIDE.Right)
             {
                 NewXpos = centerX;
                 m_Side = SIDE.Mid;
-                animator.Play("dodgetLeft");
+
+                if (InRoll)
+                    animator.Play("Swim");
+                else
+                    animator.Play("dodgetLeft");
             }
         }
         else if (SwipeRight)
@@ -112,13 +120,21 @@ public class Character : MonoBehaviour
             {
                 NewXpos = centerX + laneOffset;
                 m_Side = SIDE.Right;
-                animator.Play("dodgetRight");
+
+                if (InRoll)
+                    animator.Play("Swim");
+                else
+                    animator.Play("dodgetRight");
             }
             else if (m_Side == SIDE.Left)
             {
                 NewXpos = centerX;
                 m_Side = SIDE.Mid;
-                animator.Play("dodgetRight");
+
+                if (InRoll)
+                    animator.Play("Swim");
+                else
+                    animator.Play("dodgetRight");
             }
         }
         Vector3 moveVector = new Vector3(x - transform.position.x,y*Time.deltaTime,0);
@@ -132,42 +148,52 @@ public class Character : MonoBehaviour
     {
         if (m_char.isGrounded)
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
             {
                 animator.Play("Landing");
                 InJump = false;
             }
 
-
-            if(SwipeUp)
+            if (SwipeUp)
             {
                 y = JumpPower;
                 animator.CrossFadeInFixedTime("Jump", 0.1f);
                 InJump = true;
-                    
+                InRoll = false;
+
+
+                if (surfBoad != null) surfBoad.SetActive(true);
             }
-        }else
+        }
+        else
         {
-            y -= JumpPower*2 *Time.deltaTime;
-            if (m_char.velocity.y<-0.1f)
-            animator.Play("Falling");
+            y -= JumpPower * 2 * Time.deltaTime;
+            if (m_char.velocity.y < -0.1f)
+                animator.Play("Falling");
         }
     }
 
     public void Swim()
     {
-        if (SwipeDown && !InRoll)  
+        if (SwipeDown && !InRoll)
         {
-            InRoll = true; 
+            InRoll = true;
             animator.CrossFadeInFixedTime("Swim", 0.1f);
-            Vector3 targetPos = new Vector3(transform.position.x, -10f, transform.position.z);
-            Invoke("EndSwim", 1.0f); 
+
+            // Hide surfboard
+            if (surfBoad != null) surfBoad.SetActive(false);
+
+            Invoke("EndSwim", 1.0f);
         }
     }
 
     void EndSwim()
     {
-        InRoll = false;
+        //InRoll = false;
+
+        
+       // if (surfBoad != null) surfBoad.SetActive(true);
     }
+
 
 }

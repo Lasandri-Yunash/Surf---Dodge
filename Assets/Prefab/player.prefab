@@ -2244,6 +2244,8 @@ GameObject:
   - component: {fileID: 3542317453200358167}
   - component: {fileID: 3542317453200358164}
   - component: {fileID: 3542317453200358165}
+  - component: {fileID: 1527093165119818517}
+  - component: {fileID: 2054044338314116198}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -2302,6 +2304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Side: 1
+  NewXpos: -2.28
+  laneOffset: 10
   SwipeLeft: 0
   SwipeRight: 0
   SwipeUp: 0
@@ -2312,6 +2316,7 @@ MonoBehaviour:
   JumpPower: 7
   InJump: 0
   InRoll: 0
+  surfBoad: {fileID: 8171200727541510211}
 --- !u!143 &3542317453200358165
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2329,7 +2334,39 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.59, z: 0}
+--- !u!114 &1527093165119818517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611995287682676631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9beca7ca9f73942b7d710e46e211b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 3
+  heartImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fullHeart: {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  brokenHeart: {fileID: 21300120, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+--- !u!114 &2054044338314116198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611995287682676631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b313961789b214d9264e6167ba76a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
 --- !u!1 &8651940067566971809
 GameObject:
   m_ObjectHideFlags: 0
