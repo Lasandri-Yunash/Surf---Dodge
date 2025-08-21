@@ -3790,6 +3790,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 8758859543787961916}
   buttonClickClip: {fileID: 8300000, guid: 55aa415c31447dd4894ce7a13acf8d47, type: 3}
+  moveClip: {fileID: 8300000, guid: ea387ff6a60634f4eb6280cd173bf0ee, type: 3}
+  jumpClip: {fileID: 8300000, guid: ea387ff6a60634f4eb6280cd173bf0ee, type: 3}
+  swimClip: {fileID: 8300000, guid: ea387ff6a60634f4eb6280cd173bf0ee, type: 3}
 --- !u!82 &8758859543787961916
 AudioSource:
   m_ObjectHideFlags: 0

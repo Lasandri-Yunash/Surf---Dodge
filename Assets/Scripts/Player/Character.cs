@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,30 +10,31 @@ public class Character : MonoBehaviour
     public SIDE m_Side = SIDE.Mid;
     public float NewXpos;
     public float laneOffset;  // distance between lanes
-    private float centerX;            // middle lane position
-    [HideInInspector]
-    public bool SwipeLeft;
-    public bool SwipeRight;
-    public bool SwipeUp;
-    public bool SwipeDown;
-    public float XValue;
+    private float centerX;    // middle lane position
+
+    [HideInInspector] public bool SwipeLeft;
+    [HideInInspector] public bool SwipeRight;
+    [HideInInspector] public bool SwipeUp;
+    [HideInInspector] public bool SwipeDown;
 
     private CharacterController m_char;
 
-    // For swipe detection
+    // Swipe detection
     private Vector2 startTouchPos;
     private bool isDragging = false;
-    public float swipeThreshold = 50f; // Pixels to trigger swipe
+    public float swipeThreshold = 50f;
 
     private Animator animator;
     private float x;
-    public float SpeedDodge;
-
-    public float JumpPower = 7f;
     private float y;
+
+    public float SpeedDodge;
+    public float JumpPower = 7f;
     public bool InJump;
     public bool InRoll;
+
     public GameObject surfBoad;
+
     void Start()
     {
         m_char = GetComponent<CharacterController>();
@@ -42,30 +42,20 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
 
         centerX = transform.position.x;
-
         m_Side = SIDE.Mid;
         NewXpos = centerX;
     }
 
     void Update()
     {
-        
-        SwipeLeft = false;
-        SwipeRight = false;
-        SwipeUp = false;
-        SwipeDown = false;
+        // Reset swipes
+        SwipeLeft = SwipeRight = SwipeUp = SwipeDown = false;
 
         // Keyboard input
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-            SwipeLeft = true;
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-            SwipeRight = true;
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            SwipeUp = true;
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            SwipeDown = true;
-
-
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) SwipeLeft = true;
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) SwipeRight = true;
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) SwipeUp = true;
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) SwipeDown = true;
 
         // Mouse/touch swipe input
         if (Input.GetMouseButtonDown(0))
@@ -82,10 +72,13 @@ public class Character : MonoBehaviour
 
                 if (Mathf.Abs(swipeDelta.x) > swipeThreshold)
                 {
-                    if (swipeDelta.x > 0)
-                        SwipeRight = true;
-                    else
-                        SwipeLeft = true;
+                    if (swipeDelta.x > 0) SwipeRight = true;
+                    else SwipeLeft = true;
+                }
+                else if (Mathf.Abs(swipeDelta.y) > swipeThreshold)
+                {
+                    if (swipeDelta.y > 0) SwipeUp = true;
+                    else SwipeDown = true;
                 }
             }
             isDragging = false;
@@ -96,22 +89,17 @@ public class Character : MonoBehaviour
         {
             if (m_Side == SIDE.Mid)
             {
-                NewXpos = centerX - laneOffset; ;
+                NewXpos = centerX - laneOffset;
                 m_Side = SIDE.Left;
-                if (InRoll)
-                    animator.Play("Swim");
-                else
-                    animator.Play("dodgetLeft");
+                PlayMoveSound();
+                animator.Play(InRoll ? "Swim" : "dodgetLeft");
             }
             else if (m_Side == SIDE.Right)
             {
                 NewXpos = centerX;
                 m_Side = SIDE.Mid;
-
-                if (InRoll)
-                    animator.Play("Swim");
-                else
-                    animator.Play("dodgetLeft");
+                PlayMoveSound();
+                animator.Play(InRoll ? "Swim" : "dodgetLeft");
             }
         }
         else if (SwipeRight)
@@ -120,26 +108,23 @@ public class Character : MonoBehaviour
             {
                 NewXpos = centerX + laneOffset;
                 m_Side = SIDE.Right;
-
-                if (InRoll)
-                    animator.Play("Swim");
-                else
-                    animator.Play("dodgetRight");
+                PlayMoveSound();
+                animator.Play(InRoll ? "Swim" : "dodgetRight");
             }
             else if (m_Side == SIDE.Left)
             {
                 NewXpos = centerX;
                 m_Side = SIDE.Mid;
-
-                if (InRoll)
-                    animator.Play("Swim");
-                else
-                    animator.Play("dodgetRight");
+                PlayMoveSound();
+                animator.Play(InRoll ? "Swim" : "dodgetRight");
             }
         }
-        Vector3 moveVector = new Vector3(x - transform.position.x,y*Time.deltaTime,0);
+
+        // Character controller movement
+        Vector3 moveVector = new Vector3(x - transform.position.x, y * Time.deltaTime, 0);
         x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
         m_char.Move(moveVector);
+
         Jump();
         Swim();
     }
@@ -161,8 +146,10 @@ public class Character : MonoBehaviour
                 InJump = true;
                 InRoll = false;
 
-
                 if (surfBoad != null) surfBoad.SetActive(true);
+
+                // 🔊 Play jump sound
+                UISoundManager.Instance.PlayJump();
             }
         }
         else
@@ -180,8 +167,10 @@ public class Character : MonoBehaviour
             InRoll = true;
             animator.CrossFadeInFixedTime("Swim", 0.1f);
 
-            // Hide surfboard
             if (surfBoad != null) surfBoad.SetActive(false);
+
+            // 🔊 Play swim sound
+            UISoundManager.Instance.PlaySwim();
 
             Invoke("EndSwim", 1.0f);
         }
@@ -190,10 +179,11 @@ public class Character : MonoBehaviour
     void EndSwim()
     {
         //InRoll = false;
-
-        
-       // if (surfBoad != null) surfBoad.SetActive(true);
+        //if (surfBoad != null) surfBoad.SetActive(true);
     }
 
-
+    private void PlayMoveSound()
+    {
+        UISoundManager.Instance.PlayMove();
+    }
 }
