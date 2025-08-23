@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UISoundManager : MonoBehaviour
 {
-    public static UISoundManager Instance; // Singleton for easy access
+    public static UISoundManager Instance; 
 
     public AudioSource sfxSource;     
 
