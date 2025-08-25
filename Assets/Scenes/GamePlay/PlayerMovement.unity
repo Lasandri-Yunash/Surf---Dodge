@@ -812,6 +812,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11bfefaf986a529498c464f0497297c3, type: 3}
+--- !u!114 &961939491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1741803455099631816, guid: 11bfefaf986a529498c464f0497297c3, type: 3}
+  m_PrefabInstance: {fileID: 961939490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495662611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b29b47e6d95bc540845d7495d326973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1262557486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1389,31 +1400,39 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
+      propertyPath: wavePrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 408595650335048975, guid: e954532d2ea641f4587dabf25616a2b9, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 1900336283718282912, guid: 42008a2095a07e2479cb92c708ace45a, type: 3}
+      objectReference: {fileID: 508815236015818879, guid: 4f231eac7ee61814cbb11f2b6da68898, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 5802740747596362976, guid: 71217beac9b7b4d4cadec1de4e69c71b, type: 3}
+      objectReference: {fileID: 1900336283718282912, guid: 42008a2095a07e2479cb92c708ace45a, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 508815236015818879, guid: f0ec01a82e142e94094fe68a958da55b, type: 3}
+      objectReference: {fileID: 5802740747596362976, guid: 71217beac9b7b4d4cadec1de4e69c71b, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 408595650335048975, guid: e954532d2ea641f4587dabf25616a2b9, type: 3}
+      objectReference: {fileID: 508815236015818879, guid: f0ec01a82e142e94094fe68a958da55b, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 8524744319979777673, guid: ea619bbcbcdd39148b7a7ef128d6f124, type: 3}
+      objectReference: {fileID: 408595650335048975, guid: e954532d2ea641f4587dabf25616a2b9, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 8524744319979777673, guid: ea619bbcbcdd39148b7a7ef128d6f124, type: 3}
+    - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
+      propertyPath: wavePrefabs.Array.data[7]
       value: 
       objectReference: {fileID: 1900336283718282912, guid: 42008a2095a07e2479cb92c708ace45a, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
@@ -3000,6 +3019,10 @@ PrefabInstance:
       propertyPath: SpeedDodge
       value: 30.01
       objectReference: {fileID: 0}
+    - target: {fileID: 3542317453200358164, guid: 0b1cbaa65949cf948ac4ab6efe466e72, type: 3}
+      propertyPath: cameraIntro
+      value: 
+      objectReference: {fileID: 961939491}
     - target: {fileID: 3542317453200358164, guid: 0b1cbaa65949cf948ac4ab6efe466e72, type: 3}
       propertyPath: swipeThreshold
       value: 50
