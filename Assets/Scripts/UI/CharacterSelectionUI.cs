@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelectionUI : MonoBehaviour
 {
@@ -32,5 +33,10 @@ public class CharacterSelectionUI : MonoBehaviour
         
         for (int i = 0; i < characterPanels.Length; i++)
             characterPanels[i].SetActive(i == index);
+    }
+
+    public void BuyButton()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }

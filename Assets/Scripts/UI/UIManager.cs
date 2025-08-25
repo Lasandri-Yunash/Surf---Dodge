@@ -55,4 +55,9 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("PlayerMovement");
     }
+
+    public void ShopButton()
+    {
+        SceneManager.LoadScene("CharacterSelection");
+    }
 }
