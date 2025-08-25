@@ -759,6 +759,10 @@ PrefabInstance:
       value: Camera
       objectReference: {fileID: 0}
     - target: {fileID: 1741803455099631816, guid: 11bfefaf986a529498c464f0497297c3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1687551364}
+    - target: {fileID: 1741803455099631816, guid: 11bfefaf986a529498c464f0497297c3, type: 3}
       propertyPath: oceanManager
       value: 
       objectReference: {fileID: 1440584119}
@@ -1484,6 +1488,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1687551364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542317453200358164, guid: 0b1cbaa65949cf948ac4ab6efe466e72, type: 3}
+  m_PrefabInstance: {fileID: 4995616077785494970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303854506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8365dafd8b21b1245ba1e0d6054fb982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1751746266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3813,9 +3828,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 8758859543787961916}
   buttonClickClip: {fileID: 8300000, guid: 55aa415c31447dd4894ce7a13acf8d47, type: 3}
-  moveClip: {fileID: 0}
-  jumpClip: {fileID: 0}
-  swimClip: {fileID: 0}
 --- !u!82 &8758859543787961916
 AudioSource:
   m_ObjectHideFlags: 0

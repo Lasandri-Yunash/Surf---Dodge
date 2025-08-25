@@ -28,4 +28,16 @@ public class CameraIntro : MonoBehaviour
             }
         }
     }
+
+    public void SetTargetY(float newY)
+    {
+        if (targetPosition != null)
+        {
+            Vector3 pos = targetPosition.position;
+            pos.y = newY;
+            targetPosition.position = pos;
+            reachedTarget = false; // allow camera to move to new target
+        }
+    }
+
 }

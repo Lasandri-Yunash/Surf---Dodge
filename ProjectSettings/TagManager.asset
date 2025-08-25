@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpawnedObject
+  - Obstacle
+  - Coin
+  - OxygenTank
   layers:
   - Default
   - TransparentFX
