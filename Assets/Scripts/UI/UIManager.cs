@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     [Header("Panels")]
     public GameObject settingsPanel;
     public GameObject infoPanel;
+    public GameObject gameoverPanel;
 
     private bool isPaused = false;
 
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     {
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (infoPanel != null) infoPanel.SetActive(false);
+        if (gameoverPanel != null) gameoverPanel.SetActive(false);
     }
 
     public void OpenSettings()
@@ -59,5 +61,11 @@ public class UIManager : MonoBehaviour
     public void ShopButton()
     {
         SceneManager.LoadScene("CharacterSelection");
+    }
+
+    public void gameOver()
+    {
+        if (infoPanel != null) infoPanel.SetActive(true);
+        PauseGame();
     }
 }

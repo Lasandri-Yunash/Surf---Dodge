@@ -152,18 +152,21 @@ public class Character : MonoBehaviour
         if (InRoll) // swimming mode
         {
             // force constant Y while swimming
-            moveVector = new Vector3(x - transform.position.x, 0, 0);
-            transform.position = new Vector3(transform.position.x, -16.04f, transform.position.z);
+            x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
+            transform.position = new Vector3(x, -16f, transform.position.z); transform.position = new Vector3(transform.position.x, -16f, transform.position.z);
+            moveVector = Vector3.zero; // No movement through CharacterController
         }
         else
         {
             // normal movement (with jump/gravity)
             moveVector = new Vector3(x - transform.position.x, y * Time.deltaTime, 0);
+            x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
             Jump();
+            m_char.Move(moveVector);
+
         }
 
-        x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
-        m_char.Move(moveVector);
+       
 
 
     }
@@ -209,9 +212,13 @@ public class Character : MonoBehaviour
             if (cameraIntro != null)
                 originalCameraY = cameraIntro.targetPosition.position.y;
 
+
+
+            //m_char.enabled = false;
+
             // Snap player to swim depth
             Vector3 pos = transform.position;
-            pos.y = -16.04f;
+            pos.y = -16f;
             transform.position = pos;
 
             //y = 0;

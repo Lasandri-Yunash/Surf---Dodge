@@ -9,9 +9,10 @@ public class PlayerHealth : MonoBehaviour
     public Sprite fullHeart;                    
     public Sprite brokenHeart;                  
 
-    private Animator animator;                   
+    private Animator animator;
     //public GameObject gameOverPanel;            
 
+    private UIManager uiManager;
     private bool isDead = false;
 
     void Start()
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHearts();
         /*if (gameOverPanel != null)
             gameOverPanel.SetActive(false);*/
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void TakeDamage()
@@ -55,8 +57,10 @@ public class PlayerHealth : MonoBehaviour
 
     void ShowGameOver()
     {
-       /* if (gameOverPanel != null)
-            gameOverPanel.SetActive(true);*/
+        if (uiManager != null)
+        {
+            uiManager.gameOver();  
+        }
     }
 
     
