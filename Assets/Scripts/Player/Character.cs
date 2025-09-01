@@ -90,9 +90,18 @@ public class Character : MonoBehaviour
                     else
                         SwipeLeft = true;
                 }
+                else if (Mathf.Abs(swipeDelta.y) > swipeThreshold)
+                {
+                    if (swipeDelta.y > 0)
+                        SwipeUp = true;
+                    // optionally handle swipe down here if needed
+                }
             }
             isDragging = false;
         }
+
+
+
 
         if (SwipeLeft)
         {
