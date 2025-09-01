@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (infoPanel != null) infoPanel.SetActive(false);
         if (gameoverPanel != null) gameoverPanel.SetActive(false);
+
     }
 
     public void OpenSettings()
@@ -55,17 +56,31 @@ public class UIManager : MonoBehaviour
 
     public void StartButton()
     {
+        Time.timeScale = 1f; 
+
         SceneManager.LoadScene("PlayerMovement");
+
     }
 
     public void ShopButton()
     {
         SceneManager.LoadScene("CharacterSelection");
     }
-
+    public void CloseShopButton()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
+    
     public void gameOver()
     {
-        if (infoPanel != null) infoPanel.SetActive(true);
+        if (gameoverPanel != null) gameoverPanel.SetActive(true);
         PauseGame();
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // Make sure time resumes
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }

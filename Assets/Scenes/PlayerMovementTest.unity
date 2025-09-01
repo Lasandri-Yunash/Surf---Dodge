@@ -1401,7 +1401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.size
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[0]
@@ -1422,19 +1422,35 @@ PrefabInstance:
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 508815236015818879, guid: f0ec01a82e142e94094fe68a958da55b, type: 3}
+      objectReference: {fileID: 508815236015818879, guid: 4f231eac7ee61814cbb11f2b6da68898, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 408595650335048975, guid: e954532d2ea641f4587dabf25616a2b9, type: 3}
+      objectReference: {fileID: 508815236015818879, guid: f0ec01a82e142e94094fe68a958da55b, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[6]
       value: 
-      objectReference: {fileID: 8524744319979777673, guid: ea619bbcbcdd39148b7a7ef128d6f124, type: 3}
+      objectReference: {fileID: 408595650335048975, guid: e954532d2ea641f4587dabf25616a2b9, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: wavePrefabs.Array.data[7]
       value: 
+      objectReference: {fileID: 8524744319979777673, guid: ea619bbcbcdd39148b7a7ef128d6f124, type: 3}
+    - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
+      propertyPath: wavePrefabs.Array.data[8]
+      value: 
       objectReference: {fileID: 1900336283718282912, guid: 42008a2095a07e2479cb92c708ace45a, type: 3}
+    - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
+      propertyPath: wavePrefabs.Array.data[9]
+      value: 
+      objectReference: {fileID: 508815236015818879, guid: 4f231eac7ee61814cbb11f2b6da68898, type: 3}
+    - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
+      propertyPath: wavePrefabs.Array.data[10]
+      value: 
+      objectReference: {fileID: 508815236015818879, guid: f0ec01a82e142e94094fe68a958da55b, type: 3}
+    - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
+      propertyPath: wavePrefabs.Array.data[11]
+      value: 
+      objectReference: {fileID: 508815236015818879, guid: 17bce769c5731e54aaaee9126cfce63b, type: 3}
     - target: {fileID: 6156814451605989165, guid: c93a49bbd3a6d4f4697dc60a28d804d8, type: 3}
       propertyPath: initialWaveSets.Array.data[0]
       value: 
@@ -2065,6 +2081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 4004515043259315786}
   infoPanel: {fileID: 0}
+  gameoverPanel: {fileID: 0}
 --- !u!4 &343533906201028783
 Transform:
   m_ObjectHideFlags: 0
