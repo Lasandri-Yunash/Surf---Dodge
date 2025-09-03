@@ -42,9 +42,9 @@ public class PlayerHealth : MonoBehaviour
         for (int i = 0; i < heartImages.Length; i++)
         {
             if (i < lives)
-                heartImages[i].sprite = fullHeart;    // alive → full heart
+                heartImages[i].sprite = fullHeart;    
             else
-                heartImages[i].sprite = brokenHeart;  // lost → broken
+                heartImages[i].sprite = brokenHeart;  
         }
     }
 

@@ -10,6 +10,6 @@ public class CharacterSelectorUI : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("PlayerMovement"); // Replace with your gameplay scene name
+        SceneManager.LoadScene("PlayerMovement"); 
     }
 }

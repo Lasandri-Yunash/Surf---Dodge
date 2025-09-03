@@ -64,7 +64,8 @@ public class UIManager : MonoBehaviour
 
     public void ShopButton()
     {
-        SceneManager.LoadScene("CharacterSelection");
+        //SceneManager.LoadScene("CharacterSelection");
+        SceneManager.LoadScene("CharacterChoose");
     }
     public void CloseShopButton()
     {
@@ -79,7 +80,7 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // Make sure time resumes
+        Time.timeScale = 1f; 
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }

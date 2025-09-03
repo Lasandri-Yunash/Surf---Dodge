@@ -10,13 +10,13 @@ public class GameplayCharacterManager : MonoBehaviour
     {
         int index = CharacterSelectionManager.Instance.selectedCharacterIndex;
 
-        // Deactivate all characters
+        
         foreach (var character in characters)
         {
             character.SetActive(false);
         }
 
-        // Activate selected character
+        
         if (index >= 0 && index < characters.Length)
         {
             characters[index].SetActive(true);

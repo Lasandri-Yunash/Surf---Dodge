@@ -36,7 +36,7 @@ public class CameraIntro : MonoBehaviour
             Vector3 pos = targetPosition.position;
             pos.y = newY;
             targetPosition.position = pos;
-            reachedTarget = false; // allow camera to move to new target
+            reachedTarget = false; 
         }
     }
 

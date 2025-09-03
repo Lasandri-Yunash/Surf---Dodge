@@ -94,7 +94,7 @@ public class Character : MonoBehaviour
                 {
                     if (swipeDelta.y > 0)
                         SwipeUp = true;
-                    // optionally handle swipe down here if needed
+                    
                 }
             }
             isDragging = false;
@@ -160,14 +160,14 @@ public class Character : MonoBehaviour
 
         if (InRoll) // swimming mode
         {
-            // force constant Y while swimming
+            
             x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
             transform.position = new Vector3(x, -16f, transform.position.z); transform.position = new Vector3(transform.position.x, -16f, transform.position.z);
-            moveVector = Vector3.zero; // No movement through CharacterController
+            moveVector = Vector3.zero; 
         }
         else
         {
-            // normal movement (with jump/gravity)
+            
             moveVector = new Vector3(x - transform.position.x, y * Time.deltaTime, 0);
             x = Mathf.Lerp(x, NewXpos, Time.deltaTime * SpeedDodge);
             Jump();
@@ -216,7 +216,7 @@ public class Character : MonoBehaviour
             InRoll = true;
             animator.CrossFadeInFixedTime("Swim", 0.1f);
 
-            // Store original positions
+            
             originalPlayerPos = transform.position;
             if (cameraIntro != null)
                 originalCameraY = cameraIntro.targetPosition.position.y;
@@ -225,7 +225,7 @@ public class Character : MonoBehaviour
 
             //m_char.enabled = false;
 
-            // Snap player to swim depth
+            
             Vector3 pos = transform.position;
             pos.y = -16f;
             transform.position = pos;
@@ -234,13 +234,13 @@ public class Character : MonoBehaviour
 
             if (surfBoad != null) surfBoad.SetActive(false);
 
-            // Move camera target when swimming
+            
             if (cameraIntro != null)
             {
                 cameraIntro.SetTargetY(-5f);
             }
 
-            // Start 5-second swim
+            
             StartCoroutine(SwimDuration(5f));
         }
     }
@@ -249,13 +249,13 @@ public class Character : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
 
-        // End swim
+        
         InRoll = false;
 
-        // Reset player position
+        
         transform.position = originalPlayerPos;
 
-        // Reset camera target
+        
         if (cameraIntro != null)
         {
             cameraIntro.SetTargetY(originalCameraY);
@@ -264,7 +264,7 @@ public class Character : MonoBehaviour
         if (surfBoad != null)
             surfBoad.SetActive(true);
 
-        animator.Play("Landing"); // or another default animation
+        animator.Play("Landing"); 
     }
 
 

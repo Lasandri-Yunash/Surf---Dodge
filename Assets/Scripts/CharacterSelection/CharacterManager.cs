@@ -1,4 +1,4 @@
-// CharacterManager.cs
+﻿/*// CharacterManager.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -72,3 +72,116 @@ public class CharacterManager : MonoBehaviour
         }
     }
 }
+*/
+
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+
+public class CharacterManager : MonoBehaviour
+{
+    public CharacterDatabase characterDB;
+
+    public TMP_Text nameTxt;
+
+    public Transform previewPoint; 
+
+    private int selectedOption = 0;
+    private GameObject currentModel;
+
+    private void Start()
+    {
+        
+        previewPoint.position = new Vector3(80f, 80f, -160f);
+
+        if (!PlayerPrefs.HasKey("selectedOption"))
+        {
+            selectedOption = 0;
+        }
+        else
+        {
+            Load();
+        }
+        UpdateCharacter(selectedOption);
+    }
+
+
+    public void NextOption()
+    {
+        selectedOption++;
+        if (selectedOption >= characterDB.CharacterCount)
+        {
+            selectedOption = 0;
+        }
+        UpdateCharacter(selectedOption);
+        save();
+    }
+
+    public void BackOption()
+    {
+        selectedOption--;
+        if (selectedOption < 0)
+        {
+            selectedOption = characterDB.CharacterCount - 1;
+        }
+        UpdateCharacter(selectedOption);
+
+        save();
+    }
+
+    private void UpdateCharacter(int selectedOption)
+    {
+        
+        if (currentModel != null)
+        {
+            Destroy(currentModel);
+        }
+
+        
+        CharacterC character = characterDB.GetCharacter(selectedOption);
+
+        
+        nameTxt.text = character.characterName;
+
+        
+        currentModel = Instantiate(character.characterPrefab, previewPoint.position, previewPoint.rotation);
+        currentModel.transform.SetParent(previewPoint);
+
+        
+        currentModel.transform.localScale = Vector3.one * 80f;
+
+        
+        currentModel.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+        
+        Rigidbody rb = currentModel.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
+    }
+
+
+
+    private void Load()
+    {
+        selectedOption = PlayerPrefs.GetInt("selectedOption");
+    }
+
+    private void save()
+    {
+        PlayerPrefs.SetInt("selectedOption", selectedOption);
+    }
+
+    public void BuyButton()
+    {
+        SceneManager.LoadScene("PlayerMovement");
+    }
+}
+
