@@ -40,6 +40,18 @@ public class Character : MonoBehaviour
     private Vector3 originalPlayerPos;
     private float originalCameraY;
 
+    public ParticleSystem waterParticles;
+    public ParticleSystem oxygenParticles;
+
+    AudioManager audioManager;
+
+
+    private void Awake()
+    {
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+    }
     void Start()
     {
         m_char = GetComponent<CharacterController>();
@@ -50,6 +62,18 @@ public class Character : MonoBehaviour
 
         m_Side = SIDE.Mid;
         NewXpos = centerX;
+
+        StartCoroutine(PlayParticlesWithDelay(4f));
+    }
+
+    private IEnumerator PlayParticlesWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (waterParticles != null)
+        {
+            waterParticles.Play();
+            oxygenParticles.Play();
+        }
     }
 
     void Update()
@@ -113,6 +137,8 @@ public class Character : MonoBehaviour
                     animator.Play("Swim");
                 else
                     animator.Play("dodgetLeft");
+                audioManager.PlaySFX(audioManager.turnsideMusic);
+
             }
             else if (m_Side == SIDE.Right)
             {
@@ -123,6 +149,8 @@ public class Character : MonoBehaviour
                     animator.Play("Swim");
                 else
                     animator.Play("dodgetLeft");
+                audioManager.PlaySFX(audioManager.turnsideMusic);
+
             }
         }
         else if (SwipeRight)
@@ -136,6 +164,8 @@ public class Character : MonoBehaviour
                     animator.Play("Swim");
                 else
                     animator.Play("dodgetRight");
+                audioManager.PlaySFX(audioManager.turnsideMusic);
+
             }
             else if (m_Side == SIDE.Left)
             {
@@ -146,6 +176,8 @@ public class Character : MonoBehaviour
                     animator.Play("Swim");
                 else
                     animator.Play("dodgetRight");
+                audioManager.PlaySFX(audioManager.turnsideMusic);
+
             }
         }
 

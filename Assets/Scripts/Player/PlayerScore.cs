@@ -5,11 +5,16 @@ public class PlayerScore : MonoBehaviour
 {
     public static int score = 0; // persists across scenes
     private TMP_Text scoreText;
+    AudioManager audioManager;
+
+    
 
     void Awake()
     {
         // Load saved score
         score = PlayerPrefs.GetInt("Coins", 0);
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Start()
@@ -36,6 +41,7 @@ public class PlayerScore : MonoBehaviour
 
             // Update UI instantly
             UpdateScoreText();
+            audioManager.PlaySFX(audioManager.coinMusic);
 
             // Destroy the coin
             Destroy(other.gameObject);

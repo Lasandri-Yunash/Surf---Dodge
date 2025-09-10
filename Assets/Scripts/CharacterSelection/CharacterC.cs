@@ -8,5 +8,7 @@ public class CharacterC
 
     public string characterName;
     public GameObject characterPrefab;
+    public GameObject previewPrefab;
+    public int characterCost; 
 
 }

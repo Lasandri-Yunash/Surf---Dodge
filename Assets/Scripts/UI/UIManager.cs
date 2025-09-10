@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
     public void ShopButton()
     {
         //SceneManager.LoadScene("CharacterSelection");
+        Time.timeScale = 1f;
         SceneManager.LoadScene("CharacterChoose");
     }
     public void CloseShopButton()

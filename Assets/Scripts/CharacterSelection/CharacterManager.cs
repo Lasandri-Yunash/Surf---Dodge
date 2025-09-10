@@ -1,83 +1,4 @@
-﻿/*// CharacterManager.cs
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class CharacterManager : MonoBehaviour
-{
-    
-    public static int selectedCharacterIndex = 0;
-
-    public GameObject[] characterPrefabs;
-
-    public string playerTag = "Player";
-
-    
-    public void SelectCharacter(int index)
-    {
-        selectedCharacterIndex = index;
-       
-    }
-
-    private void Start()
-    {
-        
-        if (SceneManager.GetActiveScene().name == "PlayerMovement")
-        {
-            ReplaceExistingPlayerInThisScene();
-        }
-    }
-
-    private void ReplaceExistingPlayerInThisScene()
-    {
-        if (characterPrefabs == null || characterPrefabs.Length == 0) return;
-
-        GameObject existing = GameObject.FindWithTag(playerTag);
-        if (existing == null)
-        {
-        
-            Character existingChar = FindObjectOfType<Character>();
-            if (existingChar != null) existing = existingChar.gameObject;
-        }
-
-        
-        Vector3 pos = Vector3.zero;
-        Quaternion rot = Quaternion.identity;
-        Transform parent = null;
-
-        if (existing != null)
-        {
-            pos = existing.transform.position;
-            rot = existing.transform.rotation;
-            parent = existing.transform.parent;
-        }
-
-        
-        if (existing != null) Destroy(existing);
-
-        
-        int i = Mathf.Clamp(selectedCharacterIndex, 0, characterPrefabs.Length - 1);
-        GameObject newPlayer = Instantiate(characterPrefabs[i], pos, rot, parent);
-
-    
-        if (!string.IsNullOrEmpty(playerTag)) newPlayer.tag = playerTag;
-
-        var cam = Camera.main;
-        if (cam != null)
-        {
-            var camIntro = cam.GetComponent<CameraIntro>();
-            if (camIntro != null)
-            {
-                camIntro.targetPosition = newPlayer.transform;
-            }
-        }
-    }
-}
-*/
-
-
-
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -88,20 +9,30 @@ public class CharacterManager : MonoBehaviour
     public CharacterDatabase characterDB;
 
     public TMP_Text nameTxt;
+    public TMP_Text costButtonText; 
 
-    public Transform previewPoint; 
+
+    public Transform previewPoint;
+    public GameObject playButton;
+    public GameObject coinIcon;
+
 
     private int selectedOption = 0;
     private GameObject currentModel;
 
+    AudioManager audioManager;
+
     private void Start()
     {
-        
-        previewPoint.position = new Vector3(80f, 80f, -160f);
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+
+        previewPoint.position = new Vector3(12f, -50f, -155f);
 
         if (!PlayerPrefs.HasKey("selectedOption"))
         {
             selectedOption = 0;
+            costButtonText.text = "SELECT";
         }
         else
         {
@@ -144,26 +75,38 @@ public class CharacterManager : MonoBehaviour
 
         
         CharacterC character = characterDB.GetCharacter(selectedOption);
-
-        
         nameTxt.text = character.characterName;
 
-        
-        currentModel = Instantiate(character.characterPrefab, previewPoint.position, previewPoint.rotation);
-        currentModel.transform.SetParent(previewPoint);
-
-        
-        currentModel.transform.localScale = Vector3.one * 80f;
-
-        
-        currentModel.transform.localPosition = new Vector3(0f, 0f, 0f);
-
-        
-        Rigidbody rb = currentModel.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (IsCharacterPurchased(selectedOption))
         {
-            rb.useGravity = false;
-            rb.isKinematic = true;
+            costButtonText.text = "SELECT";
+            playButton.SetActive(true);
+            coinIcon.SetActive(false);
+
+
+        }
+        else
+        {
+            costButtonText.text = character.characterCost.ToString();
+
+            playButton.SetActive(false); 
+
+        }
+
+        if (character.previewPrefab != null)
+        {
+            currentModel = Instantiate(character.previewPrefab, previewPoint.position, previewPoint.rotation);
+            currentModel.transform.SetParent(previewPoint);
+
+            currentModel.transform.localScale = Vector3.one * 80f;
+            currentModel.transform.localPosition = Vector3.zero;
+
+            Rigidbody rb = currentModel.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.useGravity = false;
+                rb.isKinematic = true;
+            }
         }
     }
 
@@ -181,7 +124,49 @@ public class CharacterManager : MonoBehaviour
 
     public void BuyButton()
     {
+        
+            CharacterC character = characterDB.GetCharacter(selectedOption);
+
+            if (!IsCharacterPurchased(selectedOption) && PlayerScore.score >= character.characterCost)
+            {
+                PlayerScore.score -= character.characterCost;
+                PlayerPrefs.SetInt("Coins", PlayerScore.score);
+                PlayerPrefs.SetInt("CharacterPurchased" + selectedOption, 1); // mark as purchased
+                PlayerPrefs.Save();
+
+                costButtonText.text = "SELECT";
+            audioManager.PlaySFX(audioManager.purchesMusic);
+
+            playButton.SetActive(true);
+            coinIcon.SetActive(false);
+
+            /*Time.timeScale = 1f;
+            SceneManager.LoadScene("PlayerMovement");*/
+        }
+            else if (IsCharacterPurchased(selectedOption))
+            {
+                
+                Time.timeScale = 1f;
+                //SceneManager.LoadScene("PlayerMovement");
+            }
+            else
+            {
+                Debug.Log("Not enough coins to buy this character!");
+            }
+        }
+
+    public void OnPlayButtonPressed()
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("PlayerMovement");
     }
+
+
+    private bool IsCharacterPurchased(int index)
+    {
+        // For example, save purchased states in PlayerPrefs with keys like "CharacterPurchased0", "CharacterPurchased1"...
+        return PlayerPrefs.GetInt("CharacterPurchased" + index, 0) == 1;
+    }
+
 }
 

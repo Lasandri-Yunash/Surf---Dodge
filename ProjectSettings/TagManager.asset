@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - OxygenTank
   - ScoreText
+  - Audio
   layers:
   - Default
   - TransparentFX

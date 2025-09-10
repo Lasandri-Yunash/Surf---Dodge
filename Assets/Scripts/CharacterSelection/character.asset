@@ -15,7 +15,17 @@ MonoBehaviour:
   character:
   - characterName: AAAABBB
     characterPrefab: {fileID: 8611995287682676631, guid: 0b1cbaa65949cf948ac4ab6efe466e72, type: 3}
+    previewPrefab: {fileID: 452822771580608368, guid: 708fae52053129043a115832a69013e5, type: 3}
+    characterCost: 0
   - characterName: CCCCDDDD
     characterPrefab: {fileID: 5211696859180194076, guid: 3b3c8afcbdeb0864eab97fbfc88a3ca0, type: 3}
+    previewPrefab: {fileID: 1391843232171860056, guid: c7b07f0a469d95f4d81fc04d186e6e0b, type: 3}
+    characterCost: 20000
   - characterName: OOOPPP
     characterPrefab: {fileID: 1351103632425259252, guid: bf1e99dcff91e294e81ca4e3689ccc1f, type: 3}
+    previewPrefab: {fileID: 7132804307730248799, guid: e35e8f380fd382340a1fecce29befe0a, type: 3}
+    characterCost: 50000
+  - characterName: ooooo
+    characterPrefab: {fileID: 1351103632425259252, guid: bf1e99dcff91e294e81ca4e3689ccc1f, type: 3}
+    previewPrefab: {fileID: 7132804307730248799, guid: e35e8f380fd382340a1fecce29befe0a, type: 3}
+    characterCost: 100
